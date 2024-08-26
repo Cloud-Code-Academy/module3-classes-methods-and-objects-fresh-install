@@ -184,7 +184,7 @@ public with sharing class ClassesObjectsMethodsTest {
         Assert.isNull(result, 'Year difference should be null if both dates are null');
     }
 
-    /* //UNCOMMENT TEST METHODS BELOW ONCE THE BOOK AND PERSON CLASSES ARE SET UP
+     //UNCOMMENT TEST METHODS BELOW ONCE THE BOOK AND PERSON CLASSES ARE SET UP
     @IsTest
     static void testBookClass() {
         // Initialize a new book instance
@@ -195,172 +195,173 @@ public with sharing class ClassesObjectsMethodsTest {
         Assert.areEqual('George Orwell', myBook.author, 'The author should be correctly set');
 
         // Call the getBookDetails method and verify the result
+        
         String bookDetails = myBook.getBookDetails();
         Assert.areEqual('Title: 1984, Author: George Orwell', bookDetails, 'The book details should be correctly formatted');
     }
-    */
 
-    @IsTest
-    static void testCreateAndGetBookDetails() {
-        // Call the createAndGetBookDetails method and capture the return value
-        String result = ClassesObjectsMethods.createAndGetBookDetails();
 
-        // Define the expected result
-        String expectedResult = 'Title: A Brief History of Time, Author: Stephen Hawking';
+@IsTest
+static void testCreateAndGetBookDetails() {
+    // Call the createAndGetBookDetails method and capture the return value
+    String result = ClassesObjectsMethods.createAndGetBookDetails();
 
-        // Use the Assert class to check that the result matches the expected result
-        Assert.areEqual(expectedResult, result, 'The method should return the correct book details');
+    // Define the expected result
+    String expectedResult = 'Title: A Brief History of Time, Author: Stephen Hawking';
+
+    // Use the Assert class to check that the result matches the expected result
+    Assert.areEqual(expectedResult, result, 'The method should return the correct book details');
+}
+
+ //UNCOMMENT TEST METHODS BELOW ONCE THE BOOK AND PERSON CLASSES ARE SET UP
+@IsTest
+static void testGenerateBookList() {
+    // Create a Book instance
+    ClassesObjectsMethods.Book myTestBook = new ClassesObjectsMethods.Book('Test Title', 'Test Author');
+    
+    // Call the generateBookList method and capture the return value
+    List<ClassesObjectsMethods.Book> result = ClassesObjectsMethods.generateBookList(myTestBook);
+
+    // Define the expected result
+    List<ClassesObjectsMethods.Book> expectedResult = new List<ClassesObjectsMethods.Book>{
+        new ClassesObjectsMethods.Book('Harry Potter and the Chamber of Secrets', 'J.K. Rowling'),
+        new ClassesObjectsMethods.Book('A Brief History of Time', 'Stephen Hawking')
+    };
+
+    // Use the Assert class to check that the result matches the expected result
+    Assert.areEqual(expectedResult.size(), result.size(), 'The method should return two books');
+
+    for (Integer i = 0; i < result.size(); i++) {
+        Assert.areEqual(expectedResult[i].title, result[i].title, 'Title of book at index ' + i + ' should match');
+        Assert.areEqual(expectedResult[i].author, result[i].author, 'Author of book at index ' + i + ' should match');
     }
 
-    /* //UNCOMMENT TEST METHODS BELOW ONCE THE BOOK AND PERSON CLASSES ARE SET UP
-    @IsTest
-    static void testGenerateBookList() {
-        // Create a Book instance
-        ClassesObjectsMethods.Book myTestBook = new ClassesObjectsMethods.Book('Test Title', 'Test Author');
-        
-        // Call the generateBookList method and capture the return value
-        List<ClassesObjectsMethods.Book> result = ClassesObjectsMethods.generateBookList(myTestBook);
+    Assert.areEqual(352, result[0].pages, 'Pages of book at index 0 should match');
+    Assert.areEqual(256, result[1].pages, 'Pages of book at index 1 should match');
+}
 
-        // Define the expected result
-        List<ClassesObjectsMethods.Book> expectedResult = new List<ClassesObjectsMethods.Book>{
-            new ClassesObjectsMethods.Book('Harry Potter and the Chamber of Secrets', 'J.K. Rowling'),
-            new ClassesObjectsMethods.Book('A Brief History of Time', 'Stephen Hawking')
-        };
 
-        // Use the Assert class to check that the result matches the expected result
-        Assert.areEqual(expectedResult.size(), result.size(), 'The method should return two books');
+//UNCOMMENT TEST METHODS BELOW ONCE THE BOOK AND PERSON CLASSES ARE SET UP
+@IsTest
+static void testPersonClass() {
+    // Initialize a new Person instance
+    ClassesObjectsMethods.Person testPerson = new ClassesObjectsMethods.Person('John Doe', 25);
 
-        for (Integer i = 0; i < result.size(); i++) {
-            Assert.areEqual(expectedResult[i].title, result[i].title, 'Title of book at index ' + i + ' should match');
-            Assert.areEqual(expectedResult[i].author, result[i].author, 'Author of book at index ' + i + ' should match');
-        }
+    // Check that the name and age were set correctly
+    Assert.areEqual('John Doe', testPerson.getName(), 'The name should be correctly set');
+    Assert.areEqual(25, testPerson.getAge(), 'The age should be correctly set');
 
-        Assert.areEqual(352, result[0].pages, 'Pages of book at index 0 should match');
-        Assert.areEqual(256, result[1].pages, 'Pages of book at index 1 should match');
+    // Call the introduceYourself method and verify the result
+    String intro = testPerson.introduceYourself();
+    Assert.areEqual('Hello, my name is John Doe and I am 25 years old.', intro, 'The introduction should be correctly formatted');
+
+    // Test the setter methods
+    testPerson.setName('Jane Doe');
+    testPerson.setAge(30);
+
+    // Verify that the name and age have been updated correctly
+    Assert.areEqual('Jane Doe', testPerson.getName(), 'The name should be correctly updated');
+    Assert.areEqual(30, testPerson.getAge(), 'The age should be correctly updated');
+
+    // Call the introduceYourself method again and verify the result
+    intro = testPerson.introduceYourself();
+    Assert.areEqual('Hello, my name is Jane Doe and I am 30 years old.', intro, 'The updated introduction should be correctly formatted');
+}
+
+
+@IsTest
+static void testPersonDetails() {
+    // Call the personDetails method and capture the return value
+    List<String> resultDetails = ClassesObjectsMethods.personDetails();
+
+    // Check that the returned List has 3 elements
+    Assert.areEqual(3, resultDetails.size(), 'The returned List should contain 3 elements');
+
+    // Define the expected values for comparison
+    String expectedIntro = 'Hello, my name is John Doe and I am 28 years old.';
+    String expectedName = 'John Doe';
+    String expectedAge = '28';
+
+    // Check that the first element in the returned List is the expected introduction
+    Assert.areEqual(expectedIntro, resultDetails.get(0), 'The first element should be the expected introduction');
+
+    // Check that the second element in the returned List is the expected name
+    Assert.areEqual(expectedName, resultDetails.get(1), 'The second element should be the expected name');
+
+    // Check that the third element in the returned List is the expected age
+    Assert.areEqual(expectedAge, resultDetails.get(2), 'The third element should be the expected age');
+}
+
+// UNCOMMENT TEST METHODS BELOW ONCE THE BOOK AND PERSON CLASSES ARE SET UP
+@IsTest
+static void testCreatePerson() {
+    // Define the name and age to use for testing
+    String testName = 'Test Name';
+    Integer testAge = 30;
+    
+    // Call the createPerson method and capture the return value
+    ClassesObjectsMethods.Person resultPerson = ClassesObjectsMethods.createPerson(testName, testAge);
+
+    // Use the Assert class to check that the result person's name and age matches the test name and age
+    Assert.areEqual(testName, resultPerson.getName(), 'The person\'s name should match the test name');
+    Assert.areEqual(testAge, resultPerson.getAge(), 'The person\'s age should match the test age');
+}
+
+
+// UNCOMMENT TEST METHODS BELOW ONCE THE BOOK AND PERSON CLASSES ARE SET UP
+@IsTest
+static void testCreateMultiplePersons() {
+    // Define a list of names and an age for testing
+    List<String> testNames = new List<String>{'Test Name 1', 'Test Name 2', 'Test Name 3'};
+    Integer testAge = 30;
+    
+    // Call the createMultiplePersons method and capture the return value
+    List<ClassesObjectsMethods.Person> resultPersons = ClassesObjectsMethods.createMultiplePersons(testNames, testAge);
+
+    // Check that the number of persons returned matches the number of test names
+    Assert.areEqual(testNames.size(), resultPersons.size(), 'The number of persons should match the number of test names');
+
+    // Loop through each name in the test names
+    for (Integer i = 0; i < testNames.size(); i++) {
+        // Check that each person's name and age matches the test name and age
+        Assert.areEqual(testNames[i], resultPersons[i].getName(), 'The person\'s name should match the test name');
+        Assert.areEqual(testAge, resultPersons[i].getAge(), 'The person\'s age should match the test age');
     }
-    */
+}
 
-    /* //UNCOMMENT TEST METHODS BELOW ONCE THE BOOK AND PERSON CLASSES ARE SET UP
-    @IsTest
-    static void testPersonClass() {
-        // Initialize a new Person instance
-        ClassesObjectsMethods.Person testPerson = new ClassesObjectsMethods.Person('John Doe', 25);
 
-        // Check that the name and age were set correctly
-        Assert.areEqual('John Doe', testPerson.getName(), 'The name should be correctly set');
-        Assert.areEqual(25, testPerson.getAge(), 'The age should be correctly set');
+// UNCOMMENT TEST METHODS BELOW ONCE THE BOOK AND PERSON CLASSES ARE SET UP
+@IsTest
+static void testGetOlderPerson() {
+    // Create two Person objects with different ages
+    ClassesObjectsMethods.Person person1 = new ClassesObjectsMethods.Person('Person1', 25);
+    ClassesObjectsMethods.Person person2 = new ClassesObjectsMethods.Person('Person2', 30);
 
-        // Call the introduceYourself method and verify the result
-        String intro = testPerson.introduceYourself();
-        Assert.areEqual('Hello, my name is John Doe and I am 25 years old.', intro, 'The introduction should be correctly formatted');
+    // Call the getOlderPerson method and capture the return value
+    ClassesObjectsMethods.Person resultPerson = ClassesObjectsMethods.getOlderPerson(person1, person2);
 
-        // Test the setter methods
-        testPerson.setName('Jane Doe');
-        testPerson.setAge(30);
+    // Check that the returned Person object is the one with the greater age
+    Assert.areEqual(person2, resultPerson, 'The returned Person should be the one with the greater age');
 
-        // Verify that the name and age have been updated correctly
-        Assert.areEqual('Jane Doe', testPerson.getName(), 'The name should be correctly updated');
-        Assert.areEqual(30, testPerson.getAge(), 'The age should be correctly updated');
+    // Swap the ages and retest
+    person1.setAge(35);
+    person2.setAge(30);
 
-        // Call the introduceYourself method again and verify the result
-        intro = testPerson.introduceYourself();
-        Assert.areEqual('Hello, my name is Jane Doe and I am 30 years old.', intro, 'The updated introduction should be correctly formatted');
-    }
-    */
+    // Call the getOlderPerson method and capture the return value
+    resultPerson = ClassesObjectsMethods.getOlderPerson(person1, person2);
 
-    @IsTest
-    static void testPersonDetails() {
-        // Call the personDetails method and capture the return value
-        List<String> resultDetails = ClassesObjectsMethods.personDetails();
+    // Check that the returned Person object is the one with the greater age
+    Assert.areEqual(person1, resultPerson, 'The returned Person should be the one with the greater age');
 
-        // Check that the returned List has 3 elements
-        Assert.areEqual(3, resultDetails.size(), 'The returned List should contain 3 elements');
+    // Set both ages to be equal and retest
+    person1.setAge(40);
+    person2.setAge(40);
 
-        // Define the expected values for comparison
-        String expectedIntro = 'Hello, my name is John Doe and I am 28 years old.';
-        String expectedName = 'John Doe';
-        String expectedAge = '28';
+    // Call the getOlderPerson method and capture the return value
+    resultPerson = ClassesObjectsMethods.getOlderPerson(person1, person2);
 
-        // Check that the first element in the returned List is the expected introduction
-        Assert.areEqual(expectedIntro, resultDetails.get(0), 'The first element should be the expected introduction');
+    // Check that the returned Person object is one of the two Persons
+    Assert.isTrue(resultPerson == person1 || resultPerson == person2, 'The returned Person should be one of the two Persons');
+}
 
-        // Check that the second element in the returned List is the expected name
-        Assert.areEqual(expectedName, resultDetails.get(1), 'The second element should be the expected name');
-
-        // Check that the third element in the returned List is the expected age
-        Assert.areEqual(expectedAge, resultDetails.get(2), 'The third element should be the expected age');
-    }
-
-    /* UNCOMMENT TEST METHODS BELOW ONCE THE BOOK AND PERSON CLASSES ARE SET UP
-    @IsTest
-    static void testCreatePerson() {
-        // Define the name and age to use for testing
-        String testName = 'Test Name';
-        Integer testAge = 30;
-        
-        // Call the createPerson method and capture the return value
-        ClassesObjectsMethods.Person resultPerson = ClassesObjectsMethods.createPerson(testName, testAge);
-
-        // Use the Assert class to check that the result person's name and age matches the test name and age
-        Assert.areEqual(testName, resultPerson.getName(), 'The person\'s name should match the test name');
-        Assert.areEqual(testAge, resultPerson.getAge(), 'The person\'s age should match the test age');
-    }
-    */
-
-    /* UNCOMMENT TEST METHODS BELOW ONCE THE BOOK AND PERSON CLASSES ARE SET UP
-    @IsTest
-    static void testCreateMultiplePersons() {
-        // Define a list of names and an age for testing
-        List<String> testNames = new List<String>{'Test Name 1', 'Test Name 2', 'Test Name 3'};
-        Integer testAge = 30;
-        
-        // Call the createMultiplePersons method and capture the return value
-        List<ClassesObjectsMethods.Person> resultPersons = ClassesObjectsMethods.createMultiplePersons(testNames, testAge);
-
-        // Check that the number of persons returned matches the number of test names
-        Assert.areEqual(testNames.size(), resultPersons.size(), 'The number of persons should match the number of test names');
-
-        // Loop through each name in the test names
-        for (Integer i = 0; i < testNames.size(); i++) {
-            // Check that each person's name and age matches the test name and age
-            Assert.areEqual(testNames[i], resultPersons[i].getName(), 'The person\'s name should match the test name');
-            Assert.areEqual(testAge, resultPersons[i].getAge(), 'The person\'s age should match the test age');
-        }
-    }
-    */
-
-    /* UNCOMMENT TEST METHODS BELOW ONCE THE BOOK AND PERSON CLASSES ARE SET UP
-    @IsTest
-    static void testGetOlderPerson() {
-        // Create two Person objects with different ages
-        ClassesObjectsMethods.Person person1 = new ClassesObjectsMethods.Person('Person1', 25);
-        ClassesObjectsMethods.Person person2 = new ClassesObjectsMethods.Person('Person2', 30);
-
-        // Call the getOlderPerson method and capture the return value
-        ClassesObjectsMethods.Person resultPerson = ClassesObjectsMethods.getOlderPerson(person1, person2);
-
-        // Check that the returned Person object is the one with the greater age
-        Assert.areEqual(person2, resultPerson, 'The returned Person should be the one with the greater age');
-
-        // Swap the ages and retest
-        person1.setAge(35);
-        person2.setAge(30);
-
-        // Call the getOlderPerson method and capture the return value
-        resultPerson = ClassesObjectsMethods.getOlderPerson(person1, person2);
-
-        // Check that the returned Person object is the one with the greater age
-        Assert.areEqual(person1, resultPerson, 'The returned Person should be the one with the greater age');
-
-        // Set both ages to be equal and retest
-        person1.setAge(40);
-        person2.setAge(40);
-
-        // Call the getOlderPerson method and capture the return value
-        resultPerson = ClassesObjectsMethods.getOlderPerson(person1, person2);
-
-        // Check that the returned Person object is one of the two Persons
-        Assert.isTrue(resultPerson == person1 || resultPerson == person2, 'The returned Person should be one of the two Persons');
-    }
-    */
 }
